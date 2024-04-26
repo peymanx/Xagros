@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Cosmos.System.Graphics;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,11 @@ namespace Xagros
         public static string Version { get; set; } = "1.0.0";
         public const string DefaultPtompt = " 0:\\>";
         public string Prompt { get; set; } = DefaultPtompt;
+
+        public static Canvas Canvas;
+        public int Width { get; set; }
+        public int Height { get; set; }
+
 
         protected override void BeforeRun()
         {
@@ -112,6 +119,30 @@ Source Code:
                         Console.WriteLine(DateTime.Now.ToString("hh:mm:ss"));
                         break;
 
+
+                    case "win":
+                    case "window":
+                    case "windows":
+                    case "graphic":
+                    case "startx":
+                    case "x":
+
+                        Canvas = FullScreenCanvas.GetFullScreenCanvas();
+
+                        Width = Canvas.Mode.Columns;
+                        Height = Canvas.Mode.Rows;
+
+                        Canvas.Clear(Color.BlueViolet);
+
+                        Canvas.DrawFilledCircle(new Pen(Color.Red), 200,200,200);
+                        Canvas.DrawFilledRectangle(new Pen(Color.DarkViolet), 50,50,200,100);
+                        Canvas.DrawLine(new Pen(Color.Yellow), 0, 0, Width, Height);
+
+                        Canvas.Display();
+
+                        Console.ReadKey();
+                        break;
+
                     default: // Any other entries
                         Console.WriteLine("Command not found");
                         break;
@@ -156,5 +187,7 @@ Source Code:
                 }
             }
         }
+
+
     }
 }
