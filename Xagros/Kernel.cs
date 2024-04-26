@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Sys = Cosmos.System;
 
@@ -8,6 +9,9 @@ namespace Xagros
     public class Kernel : Sys.Kernel
     {
         public static string Version { get; set; } = "1.0.0";
+        public const string DefaultPtompt = " 0:\\>";
+        public string Prompt { get; set; } = DefaultPtompt;
+
         protected override void BeforeRun()
         {
             Console.Clear();
@@ -18,14 +22,16 @@ namespace Xagros
         {
             Console.Write(" 0:\\> ");
             var input = Console.ReadLine();
-
-            switch (input)
+            var commands = input.Split(' ');
+            if (commands.Length == 1)
             {
-                case "":
-                    break;
+                switch (input)
+                {
+                    case "":
+                        break;
 
-                case "about":
-                    Console.WriteLine(@"Programmer: 
+                    case "about":
+                        Console.WriteLine(@"Programmer: 
 	Peyman Majidi Moein aka peymanx
 Channels:
 	aparat.com/peyman.majidi
@@ -37,50 +43,96 @@ realated to a Youtube video
 Source Code:
 	github.com/peymanx
 ");
-                    break;
+                        break;
 
-                case "varsion":
-                case "ver":
-                    Console.WriteLine("Version " + Version);
-                    break;
+                    case "varsion":
+                    case "ver":
+                        Console.WriteLine("Version " + Version);
+                        break;
 
-                case "help":
-                    // TODO
-                    // user manual
-                    Console.WriteLine("Go to hell");
-                    break;
+                    case "help":
+                        // TODO
+                        // user manual
+                        Console.WriteLine("Go to hell");
+                        break;
 
-                case "halt":
-                case "shutdown":
-                case "off":
-                    Sys.Power.Shutdown();
-                    break;
+                    case "halt":
+                    case "shutdown":
+                    case "off":
+                        Sys.Power.Shutdown();
+                        break;
 
-                case "reset":
-                case "reboot":
-                    Sys.Power.Reboot();
-                    break;
+                    case "color": // with no argument; restore to default color (white!)
+                        Console.ForegroundColor = ConsoleColor.White;
+                        break;
 
-                case "cls":
-                case "clear":
-                case "pak":
-                    Console.Clear();
-                    break;
+                    case "prompt": // with no argument; restore to default
+                        Prompt = DefaultPtompt;
+                        break;
 
-                case "date":
-                case "cal":
-                    Console.WriteLine(DateTime.Now.ToString("yyyy/MM/dd"));
-                    break;
+                    case "reset":
+                    case "reboot":
+                        Sys.Power.Reboot();
+                        break;
 
-                case "clock":
-                case "time":
-                    Console.WriteLine(DateTime.Now.ToString("hh:mm:ss"));
-                    break;
+                    case "cls":
+                    case "clear":
+                    case "pak":
+                        Console.Clear();
+                        break;
 
-                default: // Any other entries
-                    Console.WriteLine("Command not found");
-                    break;
+                    case "date":
+                    case "cal":
+                        Console.WriteLine(DateTime.Now.ToString("yyyy/MM/dd"));
+                        break;
 
+                    case "clock":
+                    case "time":
+                        Console.WriteLine(DateTime.Now.ToString("hh:mm:ss"));
+                        break;
+
+                    default: // Any other entries
+                        Console.WriteLine("Command not found");
+                        break;
+
+                }
+            }
+            else
+            {
+                var command = commands[0];
+                var args = string.Join(" ", commands.Skip(1));
+                switch (command)
+                {
+                    case "echo":
+                        Console.WriteLine(args);
+                        break;
+
+                    case "prompt":
+                        Prompt = args;
+                        break;
+
+                    case "color":
+                        switch (args)
+                        {
+                            case "red":
+                                Console.ForegroundColor = ConsoleColor.Red; break;
+                            case "green":
+                                Console.ForegroundColor = ConsoleColor.Green; break;
+                            case "yellow":
+                                Console.ForegroundColor = ConsoleColor.Yellow; break;
+                            case "white":
+                                Console.ForegroundColor = ConsoleColor.White; break;
+                            default:
+
+                                break;
+                        }
+                        break;
+
+
+                    default:
+                        break;
+
+                }
             }
         }
     }
