@@ -15,12 +15,25 @@ namespace Xagros
         protected override void BeforeRun()
         {
             Console.Clear();
-            Console.WriteLine($"Xagros {Kernel.Version}");
+
+
+            Console.WriteLine(@"
+ooooooo  ooooo                                                  
+ `XXXX    sX'                                                   
+   YXXX..XP     .oooo.    .oooooooo oooo rr  .ooooo.   .oooo.o 
+    `XXXX'     `P  )XXb  XXX' `XXb  `XXX''XP sXX' `XXb sXX(  'X 
+   .XPYXXX.     .oP'XXX  XXX   XXX   XXX     XXX   XXX `'YXXb.  
+  sX'  `XXXb   sX(  XXX  `PEYMANX'   XXX     XXX   XXX o.  )XXb 
+oXXXo  oXXXXXo `YXXX''Xo `Xoooooo.  sXXXb    `YXbosXP' X''XXXP' 
+                         s'     Ys                              
+                         'YXXXXXP'                                                        
+");
+            Console.WriteLine($"Version {Version}");
         }
 
         protected override void Run()
         {
-            Console.Write(" 0:\\> ");
+            Console.Write(Prompt + " ");
             var input = Console.ReadLine();
             var commands = input.Split(' ');
             if (commands.Length == 1)
