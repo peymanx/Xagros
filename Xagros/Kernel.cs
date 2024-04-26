@@ -128,19 +128,10 @@ Source Code:
                     case "x":
 
                         Canvas = FullScreenCanvas.GetFullScreenCanvas();
-
                         Width = Canvas.Mode.Columns;
                         Height = Canvas.Mode.Rows;
-
                         Canvas.Clear(Color.BlueViolet);
-
-                        Canvas.DrawFilledCircle(new Pen(Color.Red), 200,200,200);
-                        Canvas.DrawFilledRectangle(new Pen(Color.DarkViolet), 50,50,200,100);
-                        Canvas.DrawLine(new Pen(Color.Yellow), 0, 0, Width, Height);
-
-                        Canvas.Display();
-
-                        Console.ReadKey();
+                        StartX();
                         break;
 
                     default: // Any other entries
@@ -185,6 +176,42 @@ Source Code:
                         break;
 
                 }
+            }
+        }
+
+        private void StartX()
+        {
+            try
+            {
+                // sunset
+                Canvas.DrawFilledCircle(new Pen(Color.Red), Width / 2, Height / 2 - 50, 270);
+
+                Canvas.DrawFilledRectangle(new Pen(Color.DarkViolet), 0, Height / 2, Width, Height);
+
+                var horizon = Height / 2;
+                for (int i = 0; i < 20; i++)
+                {
+                    horizon += i * 3;
+                    Canvas.DrawLine(new Pen(Color.Yellow), 0, horizon, Width, horizon);
+
+                }
+
+                var vorizon = Width / 2;
+                for (int i = 0; i < Width; i += 30)
+                {
+                    var gap = i * 4;
+                    Canvas.DrawLine(new Pen(Color.Yellow, 6), vorizon + i, Height / 2, vorizon + gap, Height);
+                    Canvas.DrawLine(new Pen(Color.Yellow, 6), vorizon - i, Height / 2, vorizon - gap, Height);
+                }
+
+                Canvas.Display();
+
+                Console.ReadKey();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Got fatal exception {e.Message}");
             }
         }
 
