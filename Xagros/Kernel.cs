@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Sys = Cosmos.System;
@@ -97,6 +98,13 @@ Source Code:
                     case "date":
                     case "cal":
                         Console.WriteLine(DateTime.Now.ToString("yyyy/MM/dd"));
+                        break;
+
+                    case "tarikh":
+                    case "jcal":
+                        DateTime d = DateTime.Now;
+                        PersianCalendar pc = new PersianCalendar();
+                        Console.WriteLine(string.Format("{0}/{1}/{2}", pc.GetYear(d), pc.GetMonth(d), pc.GetDayOfMonth(d)));
                         break;
 
                     case "clock":
