@@ -92,7 +92,7 @@ Source Code:
 ");
                         break;
 
-                    case "varsion":
+                    case "version":
                     case "ver":
                         Console.WriteLine("Version " + Version);
                         break;
@@ -148,7 +148,7 @@ Source Code:
                     case "mario":
                     case "supermario":
                     case "gharchkhor":
-                    case "qrchkhor":
+                    case "qarchkhor":
                         Music.SuperMario();
                         break;
 
