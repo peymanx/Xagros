@@ -142,6 +142,7 @@ Source Code:
 
                     case "color": // with no argument; restore to default color (white!)
                         Console.ForegroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.Blue;
                         break;
 
                     case "prompt": // with no argument; restore to default
@@ -239,8 +240,21 @@ Source Code:
                                 Console.ForegroundColor = ConsoleColor.Yellow; break;
                             case "white":
                                 Console.ForegroundColor = ConsoleColor.White; break;
-                            default:
+                            case "blue":
+                                Console.ForegroundColor = ConsoleColor.Blue; break;
+                            case "cyan":
+                                Console.ForegroundColor = ConsoleColor.Cyan; break;
+                            case "magenta":
+                                Console.ForegroundColor = ConsoleColor.Magenta; break;
+                            case "lcd":
+                            case "old":
+                                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Clear();
+                                break;
 
+                            default:
+                                Console.WriteLine($"{args} is not a valid color.");
                                 break;
                         }
                         break;
