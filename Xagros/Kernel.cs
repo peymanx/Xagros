@@ -86,7 +86,7 @@ oXXXo  oXXXXXo `YXXX''Xo `Xoooooo.  sXXXb    `YXbosXP' X''XXXP'
             var commands = input.Split(' ');
             if (commands.Length == 1)
             {
-                switch (input)
+                switch (input.ToLower())
                 {
                     case "":
                         break;
@@ -219,7 +219,7 @@ Source Code:
             {
                 var command = commands[0];
                 var args = string.Join(" ", commands.Skip(1));
-                switch (command)
+                switch (command.ToLower())
                 {
                     case "echo":
                         Console.WriteLine(args);
