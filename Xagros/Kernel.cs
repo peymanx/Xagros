@@ -1,5 +1,6 @@
 ﻿using Cosmos.System.Graphics;
 using Cosmos.System.Graphics.Fonts;
+using IL2CPU.API.Attribs;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -23,6 +24,16 @@ namespace Xagros
         public int Height { get; set; }
 
 
+        [ManifestResourceStream(ResourceName = "Xagros.Assets.Images.folder.bmp")]
+        static byte[] FolderByte;
+        public static Bitmap Folder;
+
+        [ManifestResourceStream(ResourceName = "Xagros.Assets.Images.close_max_min_buttons.bmp")]
+        static byte[] CloseByte;
+        public static Bitmap CloseButton;
+
+
+
         protected override void BeforeRun()
         {
             Console.Clear();
@@ -40,7 +51,11 @@ oXXXo  oXXXXXo `YXXX''Xo `Xoooooo.  sXXXb    `YXbosXP' X''XXXP'
                          'YXXXXXP'                                                        
 ");
             Console.WriteLine($"Version {Version}");
+
+            //init
             DefaultFont = PCScreenFont.Default;
+            Folder = new(FolderByte);
+            CloseButton = new(CloseByte);
 
         }
 
@@ -187,8 +202,8 @@ Source Code:
         {
             try
             {
-                //new Window(200 - 50, 200 - 50, 700, 350, "peymanx", "File  Edit  View  Help");
-                //new Window(200 - 25, 200 - 25, 700, 400, "Program Files", "File  Edit  View  Help");
+                new Window(200 - 50, 200 - 50, 700, 350, "peymanx", "File  Edit  View  Help");
+                new Window(200 - 25, 200 - 25, 700, 400, "Program Files", "File  Edit  View  Help");
                 new Window(200, 200, 700, 400, "Windows", "File  Edit  View  Help");
 
                 // Taskbar

@@ -19,7 +19,13 @@ namespace Xagros.GUI
             Kernel.Canvas.DrawFilledRectangle(new Pen(Color.DarkBlue), x + 1, y + 1, w - 2, 21);
 
             // Titlebar
-            Kernel.Canvas.DrawString(title, Kernel.DefaultFont, new Pen(Color.White), x + 7, y + 4);
+            Kernel.Canvas.DrawString(title, Kernel.DefaultFont, new Pen(Color.White), x + 7 + 20, y + 4);
+
+            //  - [] X
+            Kernel.Canvas.DrawImageAlpha(Kernel.CloseButton, x + w - 62, y + 4);
+
+            // Icon
+            Kernel.Canvas.DrawImageAlpha(Kernel.Folder, x + 4, y + 4);
 
             // Content
             Kernel.Canvas.DrawString(content, Kernel.DefaultFont, new Pen(Color.Black), x + 7 + 4, y + 4 + 25);

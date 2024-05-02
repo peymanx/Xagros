@@ -21,6 +21,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Assets\Images\close_max_min_buttons.bmp" />
+      <None Remove="Assets\Images\folder.bmp" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Assets\Images\close_max_min_buttons.bmp" />
+      <EmbeddedResource Include="Assets\Images\folder.bmp" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Cosmos.Build" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Debug.Kernel" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
