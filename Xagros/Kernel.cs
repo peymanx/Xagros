@@ -1,10 +1,12 @@
-﻿using Cosmos.System.Graphics;
+﻿using Cosmos.System.FileSystem;
+using Cosmos.System.Graphics;
 using Cosmos.System.Graphics.Fonts;
 using IL2CPU.API.Attribs;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Xagros.GUI;
@@ -17,6 +19,8 @@ namespace Xagros
         public static string Version { get; set; } = "1.0.0";
         public const string DefaultPtompt = " 0:\\>";
         public string Prompt { get; set; } = DefaultPtompt;
+        public string CurrentPath { get; set; } = @"0:\";
+
 
         public static Canvas Canvas;
         public static PCScreenFont DefaultFont { get; set; }
@@ -62,7 +66,17 @@ oXXXo  oXXXXXo `YXXX''Xo `Xoooooo.  sXXXb    `YXbosXP' X''XXXP'
             Folder = new(FolderByte);
             CloseButton = new(CloseByte);
             Wallpaper = new(WallpaperByte);
+            SetupFileSystem();
 
+
+        }
+
+        public void SetupFileSystem()
+        {
+            var fs = new CosmosVFS();
+            Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
+            var available_space = fs.GetAvailableFreeSpace(CurrentPath);
+            Console.WriteLine("Available Free Space: " + available_space);
         }
 
         protected override void Run()
@@ -95,6 +109,23 @@ Source Code:
                     case "version":
                     case "ver":
                         Console.WriteLine("Version " + Version);
+                        break;
+
+                    case "ls":
+                    case "dir":
+                        var files_list = Directory.GetFiles(CurrentPath);
+                        var directory_list = Directory.GetDirectories(CurrentPath);
+                        Console.WriteLine($"Listing files and firectories of `{CurrentPath}`:");
+
+                        Console.WriteLine("- Directories");
+                        foreach (var directory in directory_list)
+                            Console.Write($"\t{directory}\t");
+                        
+                        Console.WriteLine();
+                        Console.WriteLine("- Files");
+                        foreach (var file in files_list)
+                            Console.Write($"\t{file}\t");
+                        Console.WriteLine();
                         break;
 
                     case "help":
@@ -213,7 +244,34 @@ Source Code:
                                 break;
                         }
                         break;
+                    case "touch":
+                    case "new":
+                    case "file":
+                        var filename = args;
+                        try
+                        {
+                            var file_stream = File.Create($"{CurrentPath}\\{filename}");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                        }
+                        break;
 
+                    case "md":
+                    case "mkdir":
+                    case "newfolder":
+                        var foldername = args;
+                        try
+                        {
+                            Directory.CreateDirectory($"{CurrentPath}\\{foldername}");
+                            Console.WriteLine($"{foldername} created.");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                        }
+                        break;
 
                     default:
                         break;
