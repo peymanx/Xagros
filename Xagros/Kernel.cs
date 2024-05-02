@@ -55,6 +55,7 @@ oXXXo  oXXXXXo `YXXX''Xo `Xoooooo.  sXXXb    `YXbosXP' X''XXXP'
                          'YXXXXXP'                                                        
 ");
             Console.WriteLine($"Version {Version}");
+            Music.StartUpSound();
 
             //init
             DefaultFont = PCScreenFont.Default;
@@ -142,6 +143,23 @@ Source Code:
                     case "clock":
                     case "time":
                         Console.WriteLine(DateTime.Now.ToString("hh:mm:ss"));
+                        break;
+
+                    case "mario":
+                    case "supermario":
+                    case "gharchkhor":
+                    case "qrchkhor":
+                        Music.SuperMario();
+                        break;
+
+                    case "viva":
+                        Music.Viva();
+                        break;
+
+                    case "jingle":
+                    case "jinglebell":
+                    case "jbell":
+                        Music.JingleBells();
                         break;
 
 
