@@ -1,10 +1,12 @@
 ﻿using Cosmos.System.Graphics;
+using Cosmos.System.Graphics.Fonts;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Xagros.GUI;
 using Sys = Cosmos.System;
 
 namespace Xagros
@@ -16,6 +18,7 @@ namespace Xagros
         public string Prompt { get; set; } = DefaultPtompt;
 
         public static Canvas Canvas;
+        public static PCScreenFont DefaultFont { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
 
@@ -37,6 +40,8 @@ oXXXo  oXXXXXo `YXXX''Xo `Xoooooo.  sXXXb    `YXbosXP' X''XXXP'
                          'YXXXXXP'                                                        
 ");
             Console.WriteLine($"Version {Version}");
+            DefaultFont = PCScreenFont.Default;
+
         }
 
         protected override void Run()
@@ -130,7 +135,7 @@ Source Code:
                         Canvas = FullScreenCanvas.GetFullScreenCanvas();
                         Width = Canvas.Mode.Columns;
                         Height = Canvas.Mode.Rows;
-                        Canvas.Clear(Color.BlueViolet);
+                        Canvas.Clear(Color.Teal);
                         StartX();
                         break;
 
@@ -178,8 +183,32 @@ Source Code:
                 }
             }
         }
-
         private void StartX()
+        {
+            try
+            {
+                //new Window(200 - 50, 200 - 50, 700, 350, "peymanx", "File  Edit  View  Help");
+                //new Window(200 - 25, 200 - 25, 700, 400, "Program Files", "File  Edit  View  Help");
+                new Window(200, 200, 700, 400, "Windows", "File  Edit  View  Help");
+
+                // Taskbar
+                Canvas.DrawFilledRectangle(new Pen(Color.White), 0, Height - 27, Width, 27);
+                Canvas.DrawFilledRectangle(new Pen(Color.LightGray), 0, Height - 25, Width, 25);
+                Canvas.DrawString($"start", DefaultFont, new Pen(Color.Black), 10, Height - 20);
+                Canvas.DrawString(DateTime.Now.ToString("HH:mm"), DefaultFont, new Pen(Color.Black), Width - 50, Height - 20);
+
+                Kernel.Canvas.Display();
+
+                Console.ReadKey();
+                //StartX();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Got fatal exception {e.Message}");
+            }
+        }
+        private void Sunset()
         {
             try
             {
