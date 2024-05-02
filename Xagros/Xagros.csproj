@@ -23,11 +23,13 @@
     <ItemGroup>
       <None Remove="Assets\Images\close_max_min_buttons.bmp" />
       <None Remove="Assets\Images\folder.bmp" />
+      <None Remove="Assets\Images\wallpaper.bmp" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Include="Assets\Images\close_max_min_buttons.bmp" />
       <EmbeddedResource Include="Assets\Images\folder.bmp" />
+      <EmbeddedResource Include="Assets\Images\wallpaper.bmp" />
     </ItemGroup>
 
     <ItemGroup>

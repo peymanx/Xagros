@@ -23,6 +23,10 @@ namespace Xagros
         public int Width { get; set; }
         public int Height { get; set; }
 
+        [ManifestResourceStream(ResourceName = "Xagros.Assets.Images.wallpaper.bmp")]
+        static byte[] WallpaperByte;
+        public static Bitmap Wallpaper;
+
 
         [ManifestResourceStream(ResourceName = "Xagros.Assets.Images.folder.bmp")]
         static byte[] FolderByte;
@@ -56,6 +60,7 @@ oXXXo  oXXXXXo `YXXX''Xo `Xoooooo.  sXXXb    `YXbosXP' X''XXXP'
             DefaultFont = PCScreenFont.Default;
             Folder = new(FolderByte);
             CloseButton = new(CloseByte);
+            Wallpaper = new(WallpaperByte);
 
         }
 
@@ -202,6 +207,8 @@ Source Code:
         {
             try
             {
+                Canvas.DrawImage(Wallpaper, 0, 0);
+
                 new Window(200 - 50, 200 - 50, 700, 350, "peymanx", "File  Edit  View  Help");
                 new Window(200 - 25, 200 - 25, 700, 400, "Program Files", "File  Edit  View  Help");
                 new Window(200, 200, 700, 400, "Windows", "File  Edit  View  Help");
